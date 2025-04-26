@@ -1,0 +1,52 @@
+select * from project..data
+
+-- total episodes
+select max(epno) from project..data
+select count(distinct epno) from project..data
+
+-- pitches 
+select count(distinct brand) from project..data
+
+-- total male
+select sum(male) from project..data
+
+-- total female
+select sum(female) from project..data
+
+--gender ratio
+select sum(female)/sum(male) from project..data
+
+-- total invested amount
+select sum(amountinvestedlakhs) from project..data
+
+-- avg equity taken
+select avg(a.equitytakenp) from
+(select * from project..data where equitytakenp>0) a
+
+--highest deal taken
+select max(amountinvestedlakhs) from project..data 
+
+--higheest equity taken
+select max(equitytakenp) from project..data
+
+-- pitches converted having atleast ne women
+select * from project..data
+
+
+-- avg team members
+select avg(teammembers) from project..data
+
+-- amount invested per deal
+select avg(a.amountinvestedlakhs) amount_invested_per_deal from
+(select * from project..data where deal!='No Deal') 
+
+
+-- location group of contestants
+select location,count(location) cnt from project..data group by location order by cnt desc
+
+-- sector group of contestants
+select sector,count(sector) cnt from project..data group by sector order by cnt desc
+
+
+--partner deals
+select partners,count(partners) cnt from project..data  where partners!='-' group by partners order by cnt desc
